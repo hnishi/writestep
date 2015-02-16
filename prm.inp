@@ -1,0 +1,18 @@
+# pcanishi input-parameter file
+
+# :::::::::   pca   :::::::::::::::::::::::::::
+# input
+REFPDBNAME ../samp/for_rmsd/traj/crystal_1st.pdb
+CODNAME ../samp/for_rmsd/traj/md_small.crd
+
+# output
+OUTPDBNAME out_179.pdb 
+#OUTCODNAME out.pdb 
+
+# trajectory settings
+#STRIDE 1   # mabiki
+
+# selection
+SELECTATOM  all  # all: all atoms in pdb, protein: atoms without solvent (resn WAT, CIP and CIM), heavy: heavy atoms, ca: CA (atom name) atoms in mainchain, mainchain: CA, N, C and O atoms in mainchain 
+STEPNUM 179
+
