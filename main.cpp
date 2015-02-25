@@ -5,18 +5,22 @@ using namespace std;
 int calc();  // calc() is empty func. (written in calc.cpp)
 
 int main(int argc, char *argv[]){
-   cout<<"Version info. writestep v1.0.0 \n";
+   cout<<"Version info. writestep v1.1.0 \n";
 // ##################### ARGUMENT HANDLING ##########################
 // argv[1]: input file
   if( argv[1]==NULL ){
     puts("No ARGUMEMTS");
-    puts("USAGE: ./a.out (input parameter file) ");
+    //puts("USAGE: ./a.out (input parameter file) ");
+    puts("USAGE: ./a.out (trajectory) (pdb) ");
     return 1;
   }
-  cout<<"Your input files: "<<argv[1]<<endl;
+  cout<<"Your input files: "<<argv[1]<<" and "<<argv[2]<<endl;
 
 // INPUT_PARAMETERS
-Inp_nishi inp1( argv[1] );
+//Inp_nishi inp1( argv[1] );
+  string codname = argv[1];
+  string pdbname = argv[2];
+  //int step = atoi( argv[3] );
 
 // CHECK OF pdb_nishi
 	//calc();  // nothing occur
@@ -39,7 +43,8 @@ Inp_nishi inp1( argv[1] );
 	}*/
 // CHECK OF tra_nishi
 	cout<<"now loading cod file \n";
-	tra_nishi tra1(inp1.read("CODNAME").c_str(),inp1.read("REFPDBNAME").c_str(),inp1.read("SELECTATOM").c_str());
+	//tra_nishi tra1(inp1.read("CODNAME").c_str(),inp1.read("REFPDBNAME").c_str(),inp1.read("SELECTATOM").c_str());
+	tra_nishi tra1( codname.c_str(), pdbname.c_str(), "all");
 	//tra_nishi tra1("../samp/md_pra.cod","../samp/pra.pdb","protein");
 	//tra_nishi tra1("../samp/for_rmsd/traj/md_small.crd","../samp/for_rmsd/traj/crystal_1st.pdb", "mainchain");
 	//tra_nishi tra1("../samp/for_rmsd/traj/md_small.crd","../samp/for_rmsd/traj/crystal_1st.pdb");
@@ -57,7 +62,7 @@ Inp_nishi inp1( argv[1] );
 	//tra1.disp_line(tra1.total_step-1);
 	//tra1.write_cod("zzz.pdb",1);
 	//tra1.write_cod("zzz_100koma.pdb",1);
-	tra1.write_step(inp1.read("OUTPDBNAME").c_str(),atoi( inp1.read("STEPNUM").c_str() ) );
+	//tra1.write_step(inp1.read("OUTPDBNAME").c_str(),atoi( inp1.read("STEPNUM").c_str() ) );
 	//tra1.fix_cod_npt();
 	//tra1.fix_cod(77.63074,80.07944,158.1261);  // for md_pra.cod and pra.pdb
 	/*int stride = atoi( inp1.read("STRIDE").c_str() );
@@ -79,6 +84,15 @@ Inp_nishi inp1( argv[1] );
 	//cout<<"now writing trajectory in ASCII \n";
 	//tra1.write_cod(inp1.read("OUTCODNAME").c_str(),stride);
 	//fix_cod("out_traj.pdb",stride,float fxcell,float fycell,float fzcell);
+		puts("put step number for writing pdb");
+		int step;
+		cin >> step;
+		if( step > tra1.total_step ){
+			puts("ERROR: step number is bigger than TOTAL FRAME");
+			return 1;
+		}
+	tra1.write_step( "out_step.pdb", step );
+	cout<<"output out_step.pdb\n";
 	cout<<"finished!!!"<<endl;
 // END
 	cout<<"\nit took "<<(float)clock()/CLOCKS_PER_SEC<<" sec of CPU to execute this program"<<endl;
