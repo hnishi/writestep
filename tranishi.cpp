@@ -117,8 +117,11 @@ int tra_nishi::disp_line(int n){//display one step data at internal num. of n
 }
 
 
+/* how to use
+ * step number starts from 1 (not 0)
+*/ 
 int tra_nishi::write_step(const char* filename,int n){//output pdb at n step
-   n = n-1;
+   n = n-1; 
 	FILE *fout;
         if((fout = fopen(filename,"w")) == NULL ){//error handling
                 printf("cannot open output file: %s\n",filename);
