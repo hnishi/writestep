@@ -5,7 +5,7 @@ using namespace std;
 int calc();  // calc() is empty func. (written in calc.cpp)
 
 int main(int argc, char *argv[]){
-   cout<<"Version info. writestep v1.1.0 \n";
+   cout<<"Version info. writestep v1.1.1 \n";
 // ##################### ARGUMENT HANDLING ##########################
 // argv[1]: input file
   if( argv[1]==NULL ){
